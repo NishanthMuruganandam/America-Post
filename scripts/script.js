@@ -1,22 +1,53 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const imageGallery = document.getElementById('image-gallery');
+    const chaptersContainer = document.getElementById('chapters-container');
 
-    // TODO: Add your image filenames to this array.
-    // Place your images in the 'images' folder.
-    const images = [
-        "test_image.jpg",
-    ];
+    // TODO: Add your chapters and images here.
+    // 1. For each chapter, create a subfolder in the 'images' directory.
+    // 2. Add an entry for each chapter below, listing its images.
+    const chapters = {
+        "Chapter 1: The Beginning": {
+            folder: "chapter1",
+            images: [
+                "test_image.jpg",
+            ]
+        },
+        // "Chapter 2: The Journey": {
+        //     folder: "chapter2",
+        //     images: [
+        //         "photo3.jpg"
+        //     ]
+        // }
+    };
 
-    if (images.length === 0) {
-        imageGallery.innerHTML = '<p>No images found. Add image filenames to scripts/script.js and place the files in the /images folder.</p>';
+    const chapterKeys = Object.keys(chapters);
+
+    if (chapterKeys.length === 0) {
+        chaptersContainer.innerHTML = '<p>No chapters found. Add your chapter information to <code>scripts/script.js</code>.</p>';
         return;
     }
 
-    images.forEach(imageName => {
-        const imgElement = document.createElement('img');
-        imgElement.src = `images/${imageName}`;
-        imgElement.alt = imageName;
-        imageGallery.appendChild(imgElement);
+    chapterKeys.forEach(chapterTitle => {
+        const chapterData = chapters[chapterTitle];
+        
+        const chapterSection = document.createElement('section');
+        chapterSection.className = 'chapter';
+
+        const titleElement = document.createElement('h2');
+        titleElement.textContent = chapterTitle;
+        chapterSection.appendChild(titleElement);
+
+        const imageGallery = document.createElement('div');
+        imageGallery.className = 'image-gallery';
+
+        chapterData.images.forEach(imageName => {
+            const imgElement = document.createElement('img');
+            imgElement.src = `images/${chapterData.folder}/${imageName}`;
+            imgElement.alt = imageName;
+            imageGallery.appendChild(imgElement);
+        });
+
+        chapterSection.appendChild(imageGallery);
+        chaptersContainer.appendChild(chapterSection);
     });
 });
 
