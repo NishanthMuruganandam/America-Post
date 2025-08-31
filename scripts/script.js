@@ -4,20 +4,26 @@ document.addEventListener('DOMContentLoaded', function() {
     // TODO: Add your chapters and images here.
     // 1. For each chapter, create a subfolder in the 'images' directory.
     // 2. Add an entry for each chapter below, listing its images.
+    class Images {
+        constructor(fileName, description) {
+            this.fileName = fileName;
+            this.description = description;
+        }
+    };
+
     const chapters = {
-        "Chapter 1: The Beginning": {
+        "1. பயணம் ஆரம்பம்": {
             folder: "chapter1",
             images: [
-                "test_image.jpg",
-                "test_image copy.jpg"
+                new Images("test_image.jpg", "This is a test image"),
             ]
         },
-        // "Chapter 2: The Journey": {
-        //     folder: "chapter2",
-        //     images: [
-        //         "photo3.jpg"
-        //     ]
-        // }
+        "2. சிலிகான் பள்ளத்தாக்கு ( 3 )": {
+             folder: "chapter2",
+             images: [
+                new Images("test_image copy.jpg", "This is another test image")
+             ]
+         }
     };
 
     const chapterKeys = Object.keys(chapters);
@@ -40,15 +46,26 @@ document.addEventListener('DOMContentLoaded', function() {
         const imageGallery = document.createElement('div');
         imageGallery.className = 'image-gallery';
 
-        chapterData.images.forEach(imageName => {
+        chapterData.images.forEach(image => {
+            const imageContainer = document.createElement('div');
+            imageContainer.className = 'image-container';
+
             const imgElement = document.createElement('img');
-            imgElement.src = `images/${chapterData.folder}/${imageName}`;
-            imgElement.alt = imageName;
-            imageGallery.appendChild(imgElement);
+            imgElement.src = `images/${chapterData.folder}/${image.fileName}`;
+            imgElement.alt = image.description || image.fileName; // Better for accessibility
+            imageContainer.appendChild(imgElement);
+
+            if (image.description) {
+                const descriptionElement = document.createElement('p');
+                descriptionElement.className = 'image-description';
+                descriptionElement.textContent = image.description;
+                imageContainer.appendChild(descriptionElement);
+            }
+
+            imageGallery.appendChild(imageContainer);
         });
 
         chapterSection.appendChild(imageGallery);
         chaptersContainer.appendChild(chapterSection);
     });
 });
-
