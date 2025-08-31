@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             folder: "chapter1",
             images: [
                 "test_image.jpg",
+                "test_image copy.jpg"
             ]
         },
         // "Chapter 2: The Journey": {
