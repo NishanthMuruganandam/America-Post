@@ -23,6 +23,12 @@ document.addEventListener('DOMContentLoaded', function() {
              images: [
                 new Images("test_image copy.jpg", "This is another test image")
              ]
+         },
+         "3. Chapter Title": {
+            folder: "chapterx",
+            images: [
+                new Images("SampleImage.jpeg", "Some description here"),
+            ]
          }
     };
 
